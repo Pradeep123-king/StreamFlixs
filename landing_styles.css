@@ -1,0 +1,133 @@
+/* Language Dropdown Polish */
+.language-dropdown {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid #545454 !important;
+    padding: 3px 8px !important;
+    display: inline-flex !important;
+    width: fit-content !important;
+    gap: 6px !important;
+}
+
+.language-dropdown i {
+    font-size: 12px;
+}
+
+.language-dropdown select {
+    font-weight: 500 !important;
+    padding-right: 15px !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Landing Hero Section */
+/* Landing Hero Section */
+.landing-hero {
+    position: relative;
+    height: 700px;
+    width: 100%;
+    /* Netflix movie grid background - Darkened overlay */
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    border-bottom: 8px solid #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.landing-hero-overlay {
+    display: none !important;
+}
+
+/* Landing Curve Divider */
+.landing-curve-divider {
+    position: relative;
+    height: 40px;
+    width: 100%;
+    margin-top: -40px;
+    z-index: 10;
+    /* Creating the Dark Red Glow Curve */
+    background: radial-gradient(50% 1600% at 50% -1500%, rgba(33, 14, 23, 0.5) 0%, #141414 100%);
+    border-top: 4px solid #e50914;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    box-shadow: 0px -5px 15px rgba(200, 0, 0, 0.3);
+}
+
+/* Trending Section Styles Overrides */
+.landing-trending {
+    padding: 30px 4% 80px !important;
+    background: var(--netflix-black);
+    position: relative;
+    z-index: 11;
+}
+
+.trending-scroll {
+    gap: 70px !important;
+    padding: 20px 0 20px 40px !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.trending-item {
+    height: 300px !important;
+    min-width: 200px !important;
+    width: 200px !important;
+    margin-left: 0 !important;
+    overflow: visible !important;
+    position: relative;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+/* Position number overlapping the left side (Home Page Style) */
+.trending-number {
+    position: absolute;
+    left: -15px;
+    bottom: 0;
+    font-size: 10rem;
+    font-weight: 900;
+    font-family: 'Bebas Neue', sans-serif;
+    color: #242424;
+    -webkit-text-stroke: 4px #808080;
+    z-index: 10;
+    line-height: 0.85;
+    pointer-events: none;
+    text-shadow: none;
+}
+
+.trending-item img {
+    height: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    object-fit: cover;
+    position: relative;
+    z-index: 5;
+}
+
+.trending-item:hover {
+    transform: scale(1.1);
+    z-index: 100;
+}
+
+/* Remove redundant trending styles to keep consistency with style.css */
+
+/* Reason Cards Tweak */
+.reason-card {
+    min-height: 280px !important;
+}
+
+/* Match 'New Indian Movies' / .row-title style for Landing Header */
+.landing-trending h2 {
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 15px !important;
+    letter-spacing: 0.5px !important;
+    margin-left: 0 !important;
+    /* Aligns with the .trending-scroll padding */
+    color: white !important;
+    text-transform: capitalize !important;
+}

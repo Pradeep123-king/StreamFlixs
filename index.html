@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Clone</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="account_styles.css">
+  <link rel="stylesheet" href="landing_styles.css">
+  <link rel="stylesheet" href="startup_styles.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- Netflix Startup Animation -->
+  <div id="startup-loader" class="startup-loader">
+    <div class="netflix-animation-container">
+      <span class="letter">N</span>
+      <span class="letter">E</span>
+      <span class="letter">T</span>
+      <span class="letter">F</span>
+      <span class="letter">L</span>
+      <span class="letter">I</span>
+      <span class="letter">X</span>
+    </div>
+  </div>
+
+  <div id="landing-page" class="landing-page">
+    <header id="header" class="landing-header">
+      <div class="header-left">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix">
+      </div>
+      <div class="header-right landing-nav">
+        <div class="language-dropdown">
+          <i class="fas fa-globe"></i>
+          <select>
+            <option value="en" selected>English</option>
+            <option value="hi">Hindi</option>
+          </select>
+          <i class="fas fa-caret-down"></i>
+        </div>
+        <button class="btn-signin-nav" id="btn-login-entry">Sign In</button>
+      </div>
+    </header>
+
+    <section class="landing-hero">
+      <div class="landing-hero-overlay"></div>
+      <div class="landing-hero-content">
+        <h1>Unlimited movies, shows, and more</h1>
+        <h3>Starts at ₹149. Cancel at any time.</h3>
+        <p>Ready to watch? Enter your email to create or restart your membership.</p>
+        <form class="landing-email-form">
+          <input type="email" placeholder="Email address" required>
+          <button type="submit" class="btn-get-started">Get Started <i class="fas fa-chevron-right"></i></button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Curved Divider -->
+    <!-- Curved Divider -->
+    <div class="landing-curve-divider"></div>
+
+    <section class="landing-trending">
+      <h2>Trending Now</h2>
+      <div class="trending-scroll" id="landing-trending-container">
+        <!-- Javascript will inject trending items here -->
+      </div>
+    </section>
+
+    <section class="landing-reasons">
+      <h2>More reasons to join</h2>
+      <div class="reasons-grid">
+        <div class="reason-card">
+          <h3>Enjoy on your TV</h3>
+          <p>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
+          <i class="fas fa-tv"></i>
+        </div>
+        <div class="reason-card">
+          <h3>Download your shows to watch offline</h3>
+          <p>Save your favourites easily and always have something to watch.</p>
+          <i class="fas fa-download"></i>
+        </div>
+        <div class="reason-card">
+          <h3>Watch everywhere</h3>
+          <p>Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <div class="reason-card">
+          <h3>Create profiles for kids</h3>
+          <p>Send kids on adventures with their favourite characters in a space made just for them — free with your
+            membership.</p>
+          <i class="fas fa-smile"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question">What is Netflix? <i class="fas fa-plus"></i></button>
+          <div class="faq-answer">
+            <p>Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime,
+              documentaries and more – on thousands of internet-connected devices.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How much does Netflix cost? <i class="fas fa-plus"></i></button>
+          <div class="faq-answer">
+            <p>Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed
+              monthly fee. Plans range from ₹149 to ₹649 a month. No extra costs, no contracts.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Where can I watch? <i class="fas fa-plus"></i></button>
+          <div class="faq-answer">
+            <p>Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com
+              from your personal computer or on any internet-connected device that offers the Netflix app, including
+              smart TVs, smartphones, tablets, streaming media players and game consoles.</p>
+          </div>
+        </div>
+      </div>
+      <p class="faq-bottom-text">Ready to watch? Enter your email to create or restart your membership.</p>
+      <form class="landing-email-form">
+        <input type="email" placeholder="Email address" required>
+        <button type="submit" class="btn-get-started">Get Started <i class="fas fa-chevron-right"></i></button>
+      </form>
+    </section>
+
+
+    <footer class="landing-footer">
+      <p style="margin-bottom: 30px;">Questions? Call 000-800-919-1743</p>
+
+      <div class="footer-grid">
+        <a href="#">FAQ</a>
+        <a href="#">Help Centre</a>
+        <a href="#">Account</a>
+        <a href="#">Media Centre</a>
+        <a href="#">Investor Relations</a>
+        <a href="#">Jobs</a>
+        <a href="#">Ways to Watch</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Privacy</a>
+        <a href="#">Cookie Preferences</a>
+        <a href="#">Corporate Information</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Speed Test</a>
+        <a href="#">Legal Notices</a>
+        <a href="#">Only on Netflix</a>
+      </div>
+
+      <div class="language-dropdown footer-lang">
+        <i class="fas fa-globe"></i>
+        <select>
+          <option value="en" selected>English</option>
+          <option value="hi">Hindi</option>
+        </select>
+        <i class="fas fa-caret-down"></i>
+      </div>
+
+      <p class="footer-country">Netflix India</p>
+    </footer>
+  </div>
+
+  <div id="profile-selection" class="profile-selection" style="display: none;">
+    <div class="profile-selection-container">
+      <h1>Who's watching?</h1>
+      <div class="profile-list" id="profile-list">
+        <div class="profile-card" data-profile="Ashley">
+          <div class="profile-avatar" style="background-color: #e50914;">
+            <img
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2U1MDkxNCIvPjxjaXJjbGUgY3g9IjM1IiBjeT0iMzUiIHI9IjUiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNjUiIGN5PSIzNSIgcj0iNSIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMzAgNjUgUTUwIDgwIDcwIDY1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg=="
+              alt="Ashley">
+          </div>
+          <span class="profile-name">Ashley</span>
+        </div>
+        <div class="profile-card" data-profile="Jake">
+          <div class="profile-avatar" style="background-color: #00a8e1;">
+            <img
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzAwYThlMSIvPjxjaXJjbGUgY3g9IjM1IiBjeT0iMzUiIHI9IjUiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNjUiIGN5PSIzNSIgcj0iNSIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMzAgNjUgUTUwIDgwIDcwIDY1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg=="
+              alt="Jake">
+          </div>
+          <span class="profile-name">Jake</span>
+        </div>
+        <div class="profile-card" data-profile="Hopper lives">
+          <div class="profile-avatar" style="background-color: #e2b714;">
+            <img
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2UyYjcxNCIvPjxjaXJjbGUgY3g9IjM1IiBjeT0iMzUiIHI9IjUiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNjUiIGN5PSIzNSIgcj0iNSIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMzAgNjUgUTUwIDgwIDcwIDY1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg=="
+              alt="Hopper lives">
+          </div>
+          <span class="profile-name">Hopper lives</span>
+        </div>
+        <div class="profile-add" id="btn-add-profile">
+          <div class="profile-avatar-add">
+            <img
+              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23333'/><text x='50' y='70' font-family='Arial' font-size='70' fill='grey' text-anchor='middle'>+</text></svg>"
+              alt="Add Profile">
+          </div>
+          <span class="profile-name">Add Profile</span>
+        </div>
+      </div>
+      <button class="btn-manage-profiles">Manage Profiles</button>
+    </div>
+  </div>
+
+  <div id="add-profile-screen" class="add-profile-screen" style="display: none;">
+    <div class="add-profile-container">
+      <h1>Add Profile</h1>
+      <p>Add a profile for another person watching Netflix.</p>
+      <div class="add-profile-content">
+        <div class="add-profile-avatar" style="background-color: #333;">
+          <img
+            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23333'/><text x='50' y='70' font-family='Arial' font-size='70' fill='grey' text-anchor='middle'>+</text></svg>"
+            alt="New Profile">
+        </div>
+        <div class="add-profile-inputs">
+          <input type="text" id="new-profile-name" placeholder="Name">
+        </div>
+      </div>
+      <div class="add-profile-buttons">
+        <button class="btn-continue" id="btn-save-profile">Continue</button>
+        <button class="btn-cancel" id="btn-cancel-add">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Transition Loading Screen -->
+  <div id="loading-screen" class="loading-screen" style="display: none;">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <div id="home-page" style="display: none;">
+    <header id="app-header">
+      <div class="header-left">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix">
+        <nav class="nav-links">
+          <a href="#" id="nav-home">Home</a>
+          <a href="#" id="nav-tvshows">TV Shows</a>
+          <a href="#" id="nav-movies">Movies</a>
+          <a href="#" id="nav-latest">New & Popular</a>
+          <a href="#" id="nav-mylist">My List</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <div class="search-box">
+          <i class="fas fa-search search-icon" id="search-toggle"></i>
+          <input type="text" id="search-input" placeholder="Titles, people, genres">
+          <i class="fas fa-times search-clear" id="search-clear" style="display: none;"></i>
+        </div>
+        <div class="profile-container" id="profile-container">
+          <div class="profile" id="icon-profile">
+            <img
+              src="https://occ-0-1168-299.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdpkabKqQAIn_Mg9fP966C7U79l7S3vsh2pREInTjL7M2mG9LUnjrqSPhRz9y3-6o1FofXG.png?r=df7"
+              alt="Profile">
+            <span class="caret"></span>
+          </div>
+          <div class="profile-dropdown" id="profile-dropdown">
+            <div class="dropdown-caret"></div>
+            <div class="dropdown-profiles">
+              <div id="other-profiles"></div>
+              <div class="dropdown-profile-row" id="manage-profiles-link">
+                <i class="fas fa-pencil-alt"></i>
+                <span>Manage Profiles</span>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-links">
+              <a href="#" class="dropdown-link logout" id="logout-btn">Sign out of Netflix</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="app-content">
+      <section id="hero" class="hero">
+        <div class="hero-arrow hero-left" id="hero-prev"><i class="fas fa-chevron-left"></i></div>
+        <div class="hero-arrow hero-right" id="hero-next"><i class="fas fa-chevron-right"></i></div>
+
+        <div id="hero-contents" class="hero-contents">
+          <h1 id="hero-title" class="hero-title"></h1>
+          <p id="hero-description" class="hero-description"></p>
+          <div class="hero-buttons">
+            <button class="btn btn-play" id="btn-play"><i class="fas fa-play"></i> Play</button>
+            <button class="btn btn-add" id="btn-add"><i class="fas fa-plus"></i> My List</button>
+            <button class="btn btn-info" id="btn-info"><i class="fas fa-info-circle"></i> More Info</button>
+          </div>
+        </div>
+        <div class="hero-fade-bottom"></div>
+      </section>
+
+      <div id="rows-container">
+        <!-- Movie rows will be dynamically injected here -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Account Page Removed -->
+
+
+  <!-- Login Overlay -->
+  <div id="auth-overlay" class="auth-overlay">
+    <div class="auth-box-container">
+      <div class="auth-card">
+        <h1 id="auth-title">Sign In</h1>
+        <form id="login-form">
+          <div class="input-container" id="name-field" style="display: none;">
+            <input type="text" id="name" placeholder="Name">
+          </div>
+          <div class="input-container">
+            <input type="text" id="email" placeholder="Email or mobile number" required>
+          </div>
+          <div class="input-container" id="password-field">
+            <input type="password" id="password" placeholder="Password" required>
+          </div>
+          <div class="input-container" id="confirm-password-field" style="display: none;">
+            <input type="password" id="confirm-password" placeholder="Confirm Password">
+          </div>
+          <button type="submit" class="btn-signin" id="main-auth-btn">Sign In</button>
+
+          <div id="auth-extras">
+            <div class="auth-divider">OR</div>
+            <button type="button" class="btn-signin-code">Use a sign-in code</button>
+            <a href="#" class="forgot-link" id="forgot-password-link">Forgot Password?</a>
+          </div>
+        </form>
+
+        <div class="auth-footer">
+          <div class="remember-me">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember me</label>
+          </div>
+
+          <div id="signin-toggle-container">
+            <p class="auth-toggle-text">New to Netflix? <a href="#" id="show-signup">Sign up now.</a></p>
+          </div>
+          <div id="signup-toggle-container" style="display: none;">
+            <p class="auth-toggle-text">Already have an account? <a href="#" id="show-signin">Sign in now.</a></p>
+          </div>
+
+          <p class="captcha-text">
+            This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more.</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simple Modal for Interactivity -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="close-modal">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Video Player Modal -->
+  <div id="video-modal" class="video-modal">
+    <div class="video-modal-content">
+      <span class="close-video" id="close-video">&times;</span>
+      <div id="video-container"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
