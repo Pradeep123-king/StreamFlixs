@@ -1,3 +1,9 @@
+# StreamFlix
+
+StreamFlix is an OTT-style video streaming UI built using HTML, CSS, and JavaScript. AI-assisted development (Antigravity) was used for UI ideation, animation concepts, code optimization, and content structuring while all implementation and integration were completed by the developer.
+
+---
+
 # 🎬 StreamFlix — Watch movies, series, and trailers in one place
 
 **StreamFlix** is a premium, state-of-the-art streaming platform demonstration. Designed with a meticulous focus on modern UI/UX, it serves as a high-fidelity showcase of how a cinematic web experience should look and feel.
