@@ -75,6 +75,7 @@ const loadingScreen = document.getElementById('loading-screen');
 const profileSelection = document.getElementById('profile-selection');
 const addProfileScreen = document.getElementById('add-profile-screen');
 const newProfileNameInput = document.getElementById('new-profile-name');
+const startupLoader = document.getElementById('startup-loader');
 
 // Page Transitions
 function showHomePage() {
@@ -241,24 +242,16 @@ document.querySelectorAll('.faq-question').forEach(button => {
 });
 
 async function renderLandingTrending() {
-    const movies = await fetchData(requests.fetchTrending);
+    const hollywoodMovies = await fetchData(requests.fetchTrending);
+    const indianMovies = await fetchData(requests.fetchIndianMovies);
+
     const container = document.getElementById('landing-trending-container');
     if (!container) return;
     container.innerHTML = '';
 
-    // 1. Define Custom ID Breaking Bad
-    const extraMovie = {
-        custom: true,
-        title: "Breaking Bad",
-        overview: "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
-        backdrop_path: "https://image.tmdb.org/t/p/original/tsRy63Mu5CU8etx134mpIqIQQpX.jpg",
-        poster_path: "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
-        vote_average: 9.5,
-        id: 'custom-breaking-bad'
-    };
 
-    // 2. Find Stranger Things
-    let strangerThings = movies.find(m => m.id === 66732 || m.name === "Stranger Things");
+    // 3. Find Stranger Things
+    let strangerThings = hollywoodMovies.find(m => m.id === 66732 || m.name === "Stranger Things");
     if (!strangerThings) {
         strangerThings = {
             id: 66732,
@@ -270,7 +263,7 @@ async function renderLandingTrending() {
         };
     }
 
-    // 3. Define Squid Game Manual
+    // 4. Define Squid Game Manual
     const squidGame = {
         custom: true,
         id: 'squid-game-manual',
@@ -281,9 +274,43 @@ async function renderLandingTrending() {
         vote_average: 8.4
     };
 
-    // 4. Filter duplicates and construct final list
-    const otherMovies = movies.filter(m => m.id !== 66732 && m.name !== "Stranger Things" && m.id !== 'custom-breaking-bad' && m.name !== "Breaking Bad" && m.title !== "Squid Game");
-    const finalMovies = [extraMovie, strangerThings, squidGame, ...otherMovies].slice(0, 10);
+    // My Choice: Oppenheimer
+    const oppenheimer = {
+        custom: true,
+        id: 'custom-oppenheimer',
+        title: "Oppenheimer",
+        overview: "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+        backdrop_path: "https://image.tmdb.org/t/p/original/rLb2cs60836n94kuzMdiWKPoNJR.jpg",
+        poster_path: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+        vote_average: 8.1
+    };
+
+    // 5. Mix Movies (Interleave)
+    const mixedMovies = [];
+    const maxLength = Math.max(hollywoodMovies.length, indianMovies.length);
+
+    for (let i = 0; i < maxLength; i++) {
+        if (i < hollywoodMovies.length) mixedMovies.push(hollywoodMovies[i]);
+        if (i < indianMovies.length) mixedMovies.push(indianMovies[i]);
+    }
+
+    // Filter duplicates and special ones from mixed list
+    const uniqueMovies = mixedMovies.filter(m =>
+        m.id !== 66732 &&
+        m.name !== "Stranger Things" &&
+        (m.title !== "Dhurandhar" && m.id !== 'custom-dhurandhar') &&
+        (m.title !== "Anaconda" && m.id !== 'custom-anaconda') &&
+        m.title !== "Squid Game"
+    );
+
+    // Final list: Stranger Things -> Squid Game -> Oppenheimer -> Mixed
+    const list = [strangerThings, squidGame, oppenheimer, ...uniqueMovies].slice(0, 20);
+
+    // Remove 6th image (Index 5) as requested
+    if (list.length > 5) {
+        list.splice(5, 1);
+    }
+    const finalMovies = list;
 
     // 4. Render
     finalMovies.forEach((movie, index) => {
@@ -294,7 +321,6 @@ async function renderLandingTrending() {
         const title = movie.title || movie.name;
 
         div.innerHTML = `
-            <span class="trending-number">${index + 1}</span>
             <img src="${posterUrl}" alt="${title}">
         `;
 
@@ -825,7 +851,6 @@ async function renderTop10Row(title, url) {
         const posterUrl = movie.custom ? movie.poster_path : `${IMAGE_BASE_URL}${movie.poster_path}`;
 
         item.innerHTML = `
-            <span class="trending-number">${index + 1}</span>
             <img src="${posterUrl}" alt="${movie.title || movie.name}">
         `;
         item.onclick = () => showMovieDetails(movie, false);
@@ -1073,3 +1098,16 @@ async function init() {
 }
 
 init();
+
+// Modern Startup Logic
+window.addEventListener('load', () => {
+    const loader = document.getElementById('startup-loader');
+    if (loader) {
+        setTimeout(() => {
+            loader.classList.add('hidden');
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 800);
+        }, 1500);
+    }
+});

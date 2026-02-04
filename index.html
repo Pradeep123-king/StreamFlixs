@@ -14,6 +14,17 @@
 </head>
 
 <body>
+  <!-- Brand Reveal Startup -->
+  <div id="startup-loader" class="startup-loader">
+    <div class="startup-content">
+      <div class="startup-logo-modern">STREAMFLIX</div>
+      <div class="startup-indicator">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
 
   <div id="landing-page" class="landing-page">
     <header id="header" class="landing-header">
@@ -21,165 +32,102 @@
         <div class="logo-text clickable-logo" id="logo-landing">STREAMFLIX</div>
       </div>
       <div class="header-right landing-nav">
-        <div class="language-dropdown">
-          <i class="fas fa-globe"></i>
-          <select>
-            <option value="en" selected>English</option>
-            <option value="hi">Hindi</option>
-          </select>
-          <i class="fas fa-caret-down"></i>
-        </div>
         <button class="btn-signin-nav" id="btn-login-entry">Login</button>
       </div>
     </header>
 
+    <!-- Modern Hero Section -->
     <section class="landing-hero">
       <div class="landing-hero-overlay"></div>
-      <div class="landing-hero-content">
-        <h1>Watch movies, series, and trailers in one place</h1>
-        <h3>A UI-focused streaming platform demo</h3>
-        <p>Ready to watch? Enter your email to create or restart your membership.</p>
-        <form class="landing-email-form">
-          <input type="text" placeholder="Demo only – no login" disabled>
-          <button type="submit" class="btn-get-started">Get Started <i class="fas fa-chevron-right"></i></button>
-        </form>
+      <div class="landing-hero-content animate-pop">
+        <h1 class="modern-title">Unlimited entertainment, <br><span>reimagined.</span></h1>
+        <p class="modern-subtitle">Experience movies and series like never before on StreamFlix.</p>
+        <div class="hero-cta-group">
+          <form class="landing-email-form modern-glass-form">
+            <input type="text" placeholder="Enter your email" disabled>
+            <button type="submit" class="btn-modern-primary">Get Started <i class="fas fa-chevron-right"></i></button>
+          </form>
+        </div>
       </div>
     </section>
 
-    <!-- Curved Divider -->
-    <!-- Curved Divider -->
-    <div class="landing-curve-divider"></div>
-
+    <!-- Content Sections Only -->
     <section class="landing-trending">
-      <h2>Trending Now</h2>
-      <div class="trending-scroll" id="landing-trending-container">
+      <div class="section-header">
+        <h2 class="modern-section-title">Latest <span>Now</span></h2>
+        <div class="scroll-indicators">
+          <span class="indicator active"></span>
+          <span class="indicator"></span>
+          <span class="indicator"></span>
+        </div>
+      </div>
+      <div class="trending-scroll glass-scroll" id="landing-trending-container">
         <!-- Javascript will inject trending items here -->
       </div>
     </section>
 
-    <section class="landing-reasons">
-      <h2>More reasons to join</h2>
-      <div class="reasons-grid">
-        <div class="reason-card">
-          <h3>Enjoy on your TV</h3>
-          <p>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
-          <i class="fas fa-tv"></i>
+
+    <!-- Modern Information Section -->
+    <section class="landing-info">
+      <div class="info-grid">
+        <div class="info-card fade-in">
+          <div class="info-icon"><i class="fas fa-video"></i></div>
+          <h3>Ultra High Quality</h3>
+          <p>Experience movies and TV shows in stunning 4K HDR with Dolby Atmos sound.</p>
         </div>
-        <div class="reason-card">
-          <h3>Download your shows to watch offline</h3>
-          <p>Save your favourites easily and always have something to watch.</p>
-          <i class="fas fa-download"></i>
+        <div class="info-card fade-in">
+          <div class="info-icon"><i class="fas fa-layer-group"></i></div>
+          <h3>Personalized for You</h3>
+          <p>Our smart algorithms learn what you love to give you the best recommendations.</p>
         </div>
-        <div class="reason-card">
-          <h3>Watch everywhere</h3>
-          <p>Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
-          <i class="fas fa-mobile-alt"></i>
-        </div>
-        <div class="reason-card">
-          <h3>Create profiles for kids</h3>
-          <p>Send kids on adventures with their favourite characters in a space made just for them — free with your
-            membership.</p>
-          <i class="fas fa-smile"></i>
+        <div class="info-card fade-in">
+          <div class="info-icon"><i class="fas fa-cloud-download-alt"></i></div>
+          <h3>Watch Anywhere</h3>
+          <p>Stream on your phone, tablet, or TV, and download favorites for offline viewing.</p>
         </div>
       </div>
     </section>
 
-    <section class="landing-faq">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-container">
-        <div class="faq-item">
-          <button class="faq-question">What is StreamFlix? <i class="fas fa-plus"></i></button>
-          <div class="faq-answer">
-            <p>StreamFlix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime,
-              documentaries and more – on thousands of internet-connected devices.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">How much does StreamFlix cost? <i class="fas fa-plus"></i></button>
-          <div class="faq-answer">
-            <p>Watch StreamFlix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed
-              monthly fee. Plans range from ₹149 to ₹649 a month. No extra costs, no contracts.</p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">Where can I watch? <i class="fas fa-plus"></i></button>
-          <div class="faq-answer">
-            <p>Watch anywhere, anytime. Sign in with your StreamFlix account to watch instantly on the web at
-              streamflix.com
-              from your personal computer or on any internet-connected device that offers the StreamFlix app, including
-              smart TVs, smartphones, tablets, streaming media players and game consoles.</p>
-          </div>
-        </div>
-      </div>
-      <p class="faq-bottom-text">Ready to watch? Enter your email to create or restart your membership.</p>
-      <form class="landing-email-form">
-        <input type="text" placeholder="Demo only – no login" disabled>
-        <button type="submit" class="btn-get-started">Get Started <i class="fas fa-chevron-right"></i></button>
-      </form>
-    </section>
-
-
-    <footer class="landing-footer">
-      <p style="margin-bottom: 30px;">Questions? Call 000-800-919-1743</p>
-
-      <div class="footer-grid">
-        <a href="#">FAQ</a>
-        <a href="#">Help Centre</a>
-        <a href="#">Account</a>
-        <a href="#">Media Centre</a>
-        <a href="#">Investor Relations</a>
-        <a href="#">Jobs</a>
-        <a href="#">Ways to Watch</a>
-        <a href="#">Terms of Use</a>
+    <!-- Clean Minimal Footer -->
+    <footer class="landing-footer-minimal">
+      <div class="footer-brand">STREAMFLIX</div>
+      <div class="footer-links-minimal">
         <a href="#">Privacy</a>
-        <a href="#">Cookie Preferences</a>
-        <a href="#">Corporate Information</a>
-        <a href="#">Contact Us</a>
-        <a href="#">Speed Test</a>
-        <a href="#">Legal Notices</a>
-        <a href="#">Only on Netflix</a>
+        <a href="#">Terms</a>
+        <a href="#">Help Center</a>
       </div>
-
-      <div class="language-dropdown footer-lang">
-        <i class="fas fa-globe"></i>
-        <select>
-          <option value="en" selected>English</option>
-          <option value="hi">Hindi</option>
-        </select>
-        <i class="fas fa-caret-down"></i>
-      </div>
-
-      <p class="footer-country">StreamFlix India</p>
+      <div class="footer-copy">&copy; 2026 StreamFlix. Designed for the future.</div>
     </footer>
   </div>
 
   <div id="profile-selection" class="profile-selection" style="display: none;">
     <div class="profile-selection-container">
-      <h1>Who's watching?</h1>
+      <h1 class="modern-reveal-text">Welcome Back</h1>
+      <p style="color: var(--text-secondary); margin-bottom: 40px; font-size: 1.1rem;">Choose your space to continue</p>
       <div class="profile-list" id="profile-list">
         <div class="profile-card" data-profile="Ashley">
-          <div class="profile-avatar" style="background-color: #e50914;">
+          <div class="profile-avatar" style="background: var(--accent-gradient);">
             <img
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2U1MDkxNCIvPjxjaXJjbGUgY3g9IjM1IiBjeT0iMzUiIHI9IjUiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNjUiIGN5PSIzNSIgcj0iNSIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMzAgNjUgUTUwIDgwIDcwIDY1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg=="
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idHJhbnNwYXJlbnQiLz48Y2lyY2xlIGN4PSIzNSIgY3k9IjM1IiByPSI1IiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjY1IiBjeT0iMzUiIHI9IjUiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTMwIDY1IFE1MCA4MCA3MCA2NSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI1IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4="
               alt="Ashley">
           </div>
           <span class="profile-name">Ashley</span>
         </div>
         <div class="profile-card" data-profile="Jake">
-          <div class="profile-avatar" style="background-color: #00a8e1;">
+          <div class="profile-avatar" style="background: #4f46e5;">
             <img
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzAwYThlMSIvPjxjaXJjbGUgY3g9IjM1IiBjeT0iMzUiIHI9IjUiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNjUiIGN5PSIzNSIgcj0iNSIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMzAgNjUgUTUwIDgwIDcwIDY1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg=="
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idHJhbnNwYXJlbnQiLz48Y2lyY2xlIGN4PSIzNSIgY3k9IjM1IiByPSI1IiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjY1IiBjeT0iMzUiIHI9IjUiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTMwIDY1IFE1MCA4MCA3MCA2NSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI1IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4="
               alt="Jake">
           </div>
           <span class="profile-name">Jake</span>
         </div>
-        <div class="profile-card" data-profile="Hopper lives">
-          <div class="profile-avatar" style="background-color: #e2b714;">
+        <div class="profile-card" data-profile="Hopper">
+          <div class="profile-avatar" style="background: #9333ea;">
             <img
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2UyYjcxNCIvPjxjaXJjbGUgY3g9IjM1IiBjeT0iMzUiIHI9IjUiIGZpbGw9IndoaXRlIi8+PGNpcmNsZSBjeD0iNjUiIGN5PSIzNSIgcj0iNSIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMzAgNjUgUTUwIDgwIDcwIDY1IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg=="
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idHJhbnNwYXJlbnQiLz48Y2lyY2xlIGN4PSIzNSIgY3k9IjM1IiByPSI1IiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjY1IiBjeT0iMzUiIHI9IjUiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTMwIDY1IFE1MCA4MCA3MCA2NSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI1IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4="
               alt="Hopper lives">
           </div>
-          <span class="profile-name">Hopper lives</span>
+          <span class="profile-name">Hopper</span>
         </div>
         <div class="profile-add" id="btn-add-profile">
           <div class="profile-avatar-add">
