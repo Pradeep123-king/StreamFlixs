@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Netflix Clone</title>
+  <title>StreamFlix</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="account_styles.css">
   <link rel="stylesheet" href="landing_styles.css">
@@ -14,23 +14,11 @@
 </head>
 
 <body>
-  <!-- Netflix Startup Animation -->
-  <div id="startup-loader" class="startup-loader">
-    <div class="netflix-animation-container">
-      <span class="letter">N</span>
-      <span class="letter">E</span>
-      <span class="letter">T</span>
-      <span class="letter">F</span>
-      <span class="letter">L</span>
-      <span class="letter">I</span>
-      <span class="letter">X</span>
-    </div>
-  </div>
 
   <div id="landing-page" class="landing-page">
     <header id="header" class="landing-header">
       <div class="header-left">
-        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix">
+        <div class="logo-text">STREAMFLIX</div>
       </div>
       <div class="header-right landing-nav">
         <div class="language-dropdown">
@@ -48,8 +36,8 @@
     <section class="landing-hero">
       <div class="landing-hero-overlay"></div>
       <div class="landing-hero-content">
-        <h1>Unlimited movies, shows, and more</h1>
-        <h3>Starts at ₹149. Cancel at any time.</h3>
+        <h1>Watch movies, series, and trailers in one place</h1>
+        <h3>A UI-focused streaming platform demo</h3>
         <p>Ready to watch? Enter your email to create or restart your membership.</p>
         <form class="landing-email-form">
           <input type="email" placeholder="Email address" required>
@@ -100,24 +88,25 @@
       <h2>Frequently Asked Questions</h2>
       <div class="faq-container">
         <div class="faq-item">
-          <button class="faq-question">What is Netflix? <i class="fas fa-plus"></i></button>
+          <button class="faq-question">What is StreamFlix? <i class="fas fa-plus"></i></button>
           <div class="faq-answer">
-            <p>Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime,
+            <p>StreamFlix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime,
               documentaries and more – on thousands of internet-connected devices.</p>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">How much does Netflix cost? <i class="fas fa-plus"></i></button>
+          <button class="faq-question">How much does StreamFlix cost? <i class="fas fa-plus"></i></button>
           <div class="faq-answer">
-            <p>Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed
+            <p>Watch StreamFlix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed
               monthly fee. Plans range from ₹149 to ₹649 a month. No extra costs, no contracts.</p>
           </div>
         </div>
         <div class="faq-item">
           <button class="faq-question">Where can I watch? <i class="fas fa-plus"></i></button>
           <div class="faq-answer">
-            <p>Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com
-              from your personal computer or on any internet-connected device that offers the Netflix app, including
+            <p>Watch anywhere, anytime. Sign in with your StreamFlix account to watch instantly on the web at
+              netflix.com
+              from your personal computer or on any internet-connected device that offers the StreamFlix app, including
               smart TVs, smartphones, tablets, streaming media players and game consoles.</p>
           </div>
         </div>
@@ -160,7 +149,7 @@
         <i class="fas fa-caret-down"></i>
       </div>
 
-      <p class="footer-country">Netflix India</p>
+      <p class="footer-country">StreamFlix India</p>
     </footer>
   </div>
 
@@ -208,7 +197,7 @@
   <div id="add-profile-screen" class="add-profile-screen" style="display: none;">
     <div class="add-profile-container">
       <h1>Add Profile</h1>
-      <p>Add a profile for another person watching Netflix.</p>
+      <p>Add a profile for another person watching StreamFlix.</p>
       <div class="add-profile-content">
         <div class="add-profile-avatar" style="background-color: #333;">
           <img
@@ -234,7 +223,7 @@
   <div id="home-page" style="display: none;">
     <header id="app-header">
       <div class="header-left">
-        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix">
+        <div class="logo-text">STREAMFLIX</div>
         <nav class="nav-links">
           <a href="#" id="nav-home">Home</a>
           <a href="#" id="nav-tvshows">TV Shows</a>
@@ -267,7 +256,7 @@
             </div>
             <div class="dropdown-divider"></div>
             <div class="dropdown-links">
-              <a href="#" class="dropdown-link logout" id="logout-btn">Sign out of Netflix</a>
+              <a href="#" class="dropdown-link logout" id="logout-btn">Sign out of StreamFlix</a>
             </div>
           </div>
         </div>
@@ -283,9 +272,9 @@
           <h1 id="hero-title" class="hero-title"></h1>
           <p id="hero-description" class="hero-description"></p>
           <div class="hero-buttons">
-            <button class="btn btn-play" id="btn-play"><i class="fas fa-play"></i> Play</button>
-            <button class="btn btn-add" id="btn-add"><i class="fas fa-plus"></i> My List</button>
-            <button class="btn btn-info" id="btn-info"><i class="fas fa-info-circle"></i> More Info</button>
+            <button class="btn btn-play" id="btn-play"><i class="fas fa-play"></i> Watch Trailer</button>
+            <button class="btn btn-add" id="btn-add"><i class="fas fa-star"></i> Favorites</button>
+            <button class="btn btn-info" id="btn-info"><i class="fas fa-info-circle"></i> Details</button>
           </div>
         </div>
         <div class="hero-fade-bottom"></div>
@@ -334,7 +323,7 @@
           </div>
 
           <div id="signin-toggle-container">
-            <p class="auth-toggle-text">New to Netflix? <a href="#" id="show-signup">Sign up now.</a></p>
+            <p class="auth-toggle-text">New to StreamFlix? <a href="#" id="show-signup">Sign up now.</a></p>
           </div>
           <div id="signup-toggle-container" style="display: none;">
             <p class="auth-toggle-text">Already have an account? <a href="#" id="show-signin">Sign in now.</a></p>

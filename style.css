@@ -68,12 +68,45 @@ body {
 .header-left {
     display: flex;
     align-items: center;
+    gap: 30px;
 }
 
 .logo {
-    height: 25px;
-    margin-right: 25px;
+    height: 35px;
+    /* Perfect height for header */
+    width: auto;
+    object-fit: contain;
     cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.logo:hover {
+    transform: scale(1.08);
+}
+
+.logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    background: linear-gradient(135deg, #E50914 0%, #B20710 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    font-weight: 900;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    padding-top: 5px;
+    /* Slight adjustment */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    user-select: none;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.logo-text:hover {
+    transform: scale(1.05);
 }
 
 .nav-links {
@@ -311,14 +344,17 @@ body {
     border: none;
     font-weight: 700;
     border-radius: 4px;
-    padding: 0.8rem 2rem;
-    margin-right: 1.2rem;
-    font-size: 1.25rem;
+    padding: 0.5rem 1.4rem;
+    margin-right: 0.8rem;
+    font-size: 0.95rem;
     transition: var(--transition-standard);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
+    white-space: nowrap;
+    min-height: 42px;
+    /* Cinematic compact height */
 }
 
 .btn:active {
@@ -332,6 +368,7 @@ body {
 
 .btn-play:hover {
     background-color: rgba(255, 255, 255, 0.75);
+    transform: scale(1.05);
 }
 
 .btn-info,
@@ -365,7 +402,7 @@ body {
 }
 
 .row-title {
-    font-size: 1.4rem;
+    font-size: 1.4vw;
     font-weight: 700;
     margin-bottom: 15px;
     letter-spacing: 0.5px;
@@ -374,6 +411,7 @@ body {
     gap: 10px;
     transition: var(--transition-standard);
     margin-left: 0;
+    text-transform: uppercase;
 }
 
 .row-title.clickable {
@@ -716,8 +754,8 @@ body {
     cursor: pointer;
 }
 
-.btn-signin-nav {
-    background-color: var(--netflix-red);
+.btn-signin-nav,
+.btn-signup-nav {
     color: white;
     border: none;
     padding: 7px 17px;
@@ -725,6 +763,26 @@ body {
     font-weight: 500;
     font-size: 14px;
     cursor: pointer;
+    transition: var(--transition-standard);
+}
+
+.btn-signin-nav {
+    background-color: var(--netflix-red);
+}
+
+.btn-signin-nav:hover {
+    background-color: #c11119;
+}
+
+.btn-signup-nav {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.45) !important;
+    margin-left: 10px;
+}
+
+.btn-signup-nav:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: white !important;
 }
 
 .landing-hero {
@@ -1105,6 +1163,7 @@ body {
     color: white;
     text-decoration: none;
     font-weight: 500;
+    margin-left: 5px;
 }
 
 .auth-toggle-text a:hover {
@@ -1114,8 +1173,8 @@ body {
 .captcha-text {
     font-size: 13px;
     color: #8c8c8c;
+    margin-top: 15px;
     line-height: 1.4;
-    margin-top: 20px;
 }
 
 .captcha-text a {
@@ -1125,6 +1184,13 @@ body {
 
 .captcha-text a:hover {
     text-decoration: underline;
+}
+
+#signup-toggle-container,
+#signin-toggle-container {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 30px;
+    padding-top: 10px;
 }
 
 .input-container input:focus~label,
@@ -1606,58 +1672,43 @@ body {
     transition: opacity 0.5s ease-out;
 }
 
-.netflix-animation-container {
+.startup-logo-container {
     display: flex;
-    gap: 4px;
+    justify-content: center;
+    align-items: center;
 }
 
-.letter {
-    color: #E50914;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 5rem;
-    font-weight: 700;
+.startup-logo {
+    width: 450px;
+    height: auto;
     opacity: 0;
-    transform: scale(0.5);
-    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transform: scale(0.8) translateY(20px);
+    animation: cinematicReveal 1.6s cubic-bezier(0.19, 1, 0.22, 1) forwards,
+        logoPulse 4s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 20px rgba(229, 9, 20, 0.4));
 }
 
-.letter:nth-child(1) {
-    animation-delay: 0.1s;
-}
-
-.letter:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.letter:nth-child(3) {
-    animation-delay: 0.3s;
-}
-
-.letter:nth-child(4) {
-    animation-delay: 0.4s;
-}
-
-.letter:nth-child(5) {
-    animation-delay: 0.5s;
-}
-
-.letter:nth-child(6) {
-    animation-delay: 0.6s;
-}
-
-.letter:nth-child(7) {
-    animation-delay: 0.7s;
-}
-
-@keyframes popIn {
+@keyframes cinematicReveal {
     0% {
         opacity: 0;
-        transform: scale(0.5) translateY(20px);
+        transform: scale(0.8) translateY(20px);
+        filter: brightness(0) blur(15px) drop-shadow(0 0 0px transparent);
     }
 
     100% {
         opacity: 1;
         transform: scale(1) translateY(0);
+        filter: brightness(1.1) blur(0px) drop-shadow(0 0 40px rgba(229, 9, 20, 0.6));
+    }
+}
+
+@keyframes logoPulse {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.04);
     }
 }
 

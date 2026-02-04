@@ -69,7 +69,7 @@ function showHomePage() {
     }, 800);
 }
 
-function showLoginPage() {
+function showLoginPage(email = '') {
     document.getElementById('landing-page').style.display = 'none';
     document.getElementById('profile-selection').style.display = 'none';
     document.getElementById('home-page').style.display = 'none';
@@ -80,6 +80,11 @@ function showLoginPage() {
 
     // Explicitly set Sign In state when showing login page
     resetAuthState();
+
+    if (email) {
+        const emailInput = document.getElementById('email');
+        if (emailInput) emailInput.value = email;
+    }
 }
 
 function resetAuthState() {
@@ -88,6 +93,7 @@ function resetAuthState() {
     const signinToggle = document.getElementById('signin-toggle-container');
     const signupToggle = document.getElementById('signup-toggle-container');
     const nameField = document.getElementById('name-field');
+    const passwordField = document.getElementById('password-field');
     const confirmField = document.getElementById('confirm-password-field');
     const authExtras = document.getElementById('auth-extras');
 
@@ -96,8 +102,34 @@ function resetAuthState() {
     if (signinToggle) signinToggle.style.display = 'block';
     if (signupToggle) signupToggle.style.display = 'none';
     if (nameField) nameField.style.display = 'none';
+    if (passwordField) passwordField.style.display = 'block';
     if (confirmField) confirmField.style.display = 'none';
     if (authExtras) authExtras.style.display = 'block';
+}
+
+function showSignupPage(email = '') {
+    showLoginPage();
+
+    const authTitle = document.getElementById('auth-title');
+    const mainAuthBtn = document.getElementById('main-auth-btn');
+    const signinToggle = document.getElementById('signin-toggle-container');
+    const signupToggle = document.getElementById('signup-toggle-container');
+    const nameField = document.getElementById('name-field');
+    const confirmField = document.getElementById('confirm-password-field');
+    const authExtras = document.getElementById('auth-extras');
+    const emailInput = document.getElementById('email');
+
+    if (authTitle) authTitle.textContent = 'Sign Up';
+    if (mainAuthBtn) mainAuthBtn.textContent = 'Sign Up';
+    if (signinToggle) signinToggle.style.display = 'none';
+    if (signupToggle) signupToggle.style.display = 'block';
+    if (nameField) nameField.style.display = 'block';
+    if (confirmField) confirmField.style.display = 'block';
+    if (authExtras) authExtras.style.display = 'block';
+
+    if (email && emailInput) {
+        emailInput.value = email;
+    }
 }
 
 function showProfileSelection() {
@@ -242,30 +274,75 @@ async function renderLandingTrending() {
 }
 
 document.getElementById('btn-login-entry').onclick = () => showLoginPage();
+const btnSignupEntry = document.getElementById('btn-signup-entry');
+if (btnSignupEntry) {
+    btnSignupEntry.onclick = () => showSignupPage();
+}
 
 document.querySelectorAll('.landing-email-form').forEach(form => {
     form.onsubmit = (e) => {
         e.preventDefault();
-        showProfileSelection();
+        const emailInput = form.querySelector('input[type="email"]');
+        const email = emailInput ? emailInput.value : '';
+        showLoginPage(email);
     };
 });
 
 loginForm.onsubmit = (e) => {
     e.preventDefault();
-    const email = document.getElementById('email').value;
+    const email = document.getElementById('email').value.trim();
     const title = authTitle.textContent;
     const password = document.getElementById('password').value;
-    const confirm = document.getElementById('confirm-password').value;
+    const confirmElement = document.getElementById('confirm-password');
+    const confirm = confirmElement ? confirmElement.value : '';
 
-    if (title === 'Sign Up' || title === 'Reset Password') {
+    // Clear previous errors
+    const existingError = loginForm.querySelector('.auth-error-message');
+    if (existingError) existingError.remove();
+
+    function showError(msg) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'auth-error-message';
+        errorDiv.style.color = '#e87c03';
+        errorDiv.style.fontSize = '14px';
+        errorDiv.style.marginBottom = '15px';
+        errorDiv.textContent = msg;
+        loginForm.insertBefore(errorDiv, loginForm.firstChild);
+    }
+
+    if (title === 'Sign Up') {
         if (password !== confirm) {
-            alert("Passwords do not match!");
+            showError("Passwords do not match!");
             return;
         }
+        // Save the account (simulated)
+        localStorage.setItem('netflix_clone_email', email.toLowerCase());
+        localStorage.setItem('netflix_clone_password', password);
+
+        // After signup, go to sign in page as requested
+        resetAuthState();
+        document.getElementById('email').value = email;
+        document.getElementById('password').value = '';
+        return;
     }
 
     if (title === 'Reset Password') {
+        if (password !== confirm) {
+            showError("Passwords do not match!");
+            return;
+        }
+        localStorage.setItem('netflix_clone_password', password);
         alert("Password reset successful! Logging you in...");
+    }
+
+    // Sign In Validation
+    const storedEmail = localStorage.getItem('netflix_clone_email');
+    const storedPassword = localStorage.getItem('netflix_clone_password');
+
+    // Case-insensitive comparison for email
+    if (!storedEmail || email.toLowerCase() !== storedEmail.toLowerCase() || (password && password !== storedPassword)) {
+        showError("Incorrect email or password. If you are a new user, please create an account first.");
+        return;
     }
 
     if (email) {
@@ -296,7 +373,15 @@ if (profileList) {
     };
 }
 
-// Add Profile Functionality (New UI)
+// StreamFlix Details
+const streamFlixColors = ['#e50914', '#00a8e1', '#e2b714', '#2bad0b', '#8a2be2', '#3357ff', '#ff5733'];
+
+function getStreamFlixSvg(bgColor) {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="${bgColor}"/><circle cx="35" cy="35" r="5" fill="white"/><circle cx="65" cy="35" r="5" fill="white"/><path d="M30 65 Q50 80 70 65" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`;
+    return `data:image/svg+xml;base64,${btoa(svg)}`;
+}
+
+// Add Profile Functionality
 const btnAddProfile = document.getElementById('btn-add-profile');
 if (btnAddProfile) {
     btnAddProfile.onclick = () => {
@@ -305,11 +390,10 @@ if (btnAddProfile) {
         newProfileNameInput.value = '';
         newProfileNameInput.focus();
 
-        // Automatically generate a random image for the preview
-        const randomColor = netflixColors[Math.floor(Math.random() * netflixColors.length)];
-        const avatarUrl = getNetflixSvg(randomColor);
+        const randomColor = streamFlixColors[Math.floor(Math.random() * streamFlixColors.length)];
+        const avatarUrl = getStreamFlixSvg(randomColor);
         const previewAvatar = document.querySelector('.add-profile-avatar');
-        const previewImg = previewAvatar.querySelector('img');
+        const previewImg = previewAvatar ? previewAvatar.querySelector('img') : null;
 
         if (previewAvatar && previewImg) {
             previewAvatar.style.backgroundColor = randomColor;
@@ -324,13 +408,6 @@ if (btnCancelAdd) {
         addProfileScreen.style.display = 'none';
         profileSelection.style.display = 'flex';
     };
-}
-
-const netflixColors = ['#e50914', '#00a8e1', '#e2b714', '#2bad0b', '#8a2be2', '#3357ff', '#ff5733'];
-
-function getNetflixSvg(bgColor) {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="${bgColor}"/><circle cx="35" cy="35" r="5" fill="white"/><circle cx="65" cy="35" r="5" fill="white"/><path d="M30 65 Q50 80 70 65" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`;
-    return `data:image/svg+xml;base64,${btoa(svg)}`;
 }
 
 const btnSaveProfile = document.getElementById('btn-save-profile');
@@ -370,8 +447,7 @@ const handleLogout = () => {
     localStorage.removeItem('netflix_clone_auth');
     localStorage.removeItem('netflix_clone_profile');
     localStorage.removeItem('netflix_clone_profile_img');
-    localStorage.removeItem('netflix_clone_email');
-    localStorage.removeItem('netflix_clone_password');
+    // DO NOT remove email and password so user can sign in again
     location.reload();
 };
 
@@ -556,7 +632,7 @@ async function renderHero() {
         localStorage.setItem('netflix_clone_mylist', JSON.stringify(list));
     };
     document.getElementById('btn-info').onclick = () => {
-        showMovieDetails(featuredMovies[currentHeroIndex], true);
+        showMovieDetails(featuredMovies[currentHeroIndex], false);
     };
 }
 
@@ -596,7 +672,7 @@ function updateMyListButton(btn, isAdded) {
     if (isAdded) {
         btn.innerHTML = '<i class="fas fa-check"></i> Added';
     } else {
-        btn.innerHTML = '<i class="fas fa-plus"></i> My List';
+        btn.innerHTML = '<i class="fas fa-star"></i> Favorites';
     }
 }
 
@@ -802,7 +878,7 @@ async function loadPage(id) {
     if (id === 'nav-home') {
         hero.style.display = 'flex';
         await renderHero();
-        await renderRow("NETFLIX ORIGINALS", requests.fetchNetflixOriginals, true);
+        await renderRow("STREAMFLIX ORIGINALS", requests.fetchNetflixOriginals, true);
 
         await renderTop10Row("Top 10 Movies Today", requests.fetchTrendingMoviesDay);
         await renderRow("Trending Now", requests.fetchTrending, true);
@@ -903,8 +979,8 @@ async function showMovieDetails(movie, autoPlay = false) {
     // Check if added to list
     const currentList = getMyList();
     const isAdded = currentList.some(m => m.id === movie.id || m.title === movie.title);
-    const btnIcon = isAdded ? '<i class="fas fa-check"></i>' : '<i class="fas fa-plus"></i>';
-    const btnText = isAdded ? 'Added' : 'My List';
+    const btnIcon = isAdded ? '<i class="fas fa-check"></i>' : '<i class="fas fa-star"></i>';
+    const btnText = isAdded ? 'Added' : 'Favorites';
 
     // Clear previous content
     modalBody.innerHTML = '';
@@ -929,7 +1005,7 @@ async function showMovieDetails(movie, autoPlay = false) {
         </div>
         
         <div id="modal-controls" style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <button id="modal-play-btn" class="btn btn-play" style="padding: 8px 20px; font-size: 1rem;"><i class="fas fa-play"></i> Play Trailer</button>
+            <button id="modal-play-btn" class="btn btn-play" style="padding: 8px 20px; font-size: 1rem;"><i class="fas fa-play"></i> Watch Trailer</button>
             <button id="modal-mylist-btn" class="btn btn-add" style="padding: 8px 20px; font-size: 1rem;">${btnIcon} ${btnText}</button>
         </div>
 
@@ -1057,21 +1133,9 @@ function showLandingPage() {
 }
 
 async function init() {
-    const startupLoader = document.getElementById('startup-loader');
-
-    // Determine where to go, but wait for animation
+    // Determine where to go immediately
     const auth = localStorage.getItem('netflix_clone_auth');
     const profile = localStorage.getItem('netflix_clone_profile');
-
-    // Startup Animation Logic
-    if (startupLoader) {
-        setTimeout(() => {
-            startupLoader.classList.add('hidden');
-            setTimeout(() => {
-                startupLoader.style.display = 'none';
-            }, 500);
-        }, 2200);
-    }
 
     if (auth && profile) {
         updateHeaderUI();
