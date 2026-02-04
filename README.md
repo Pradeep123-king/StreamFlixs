@@ -4,7 +4,7 @@ StreamFlix is an OTT-style video streaming UI built using HTML, CSS, and JavaScr
 
 ---
 
-# 🎬 StreamFlix — Watch movies, series, and trailers in one place
+# 🎬 StreamFlix — Explore movies, series, and reviews in one place
 
 **StreamFlix** is a premium, state-of-the-art streaming platform demonstration. Designed with a meticulous focus on modern UI/UX, it serves as a high-fidelity showcase of how a cinematic web experience should look and feel.
 
@@ -19,8 +19,8 @@ StreamFlix isn't just a clone; it's a refined interpretation of modern media con
 
 ### 1. **Cinematic Hero Interface**
 - **Dynamic Content**: High-resolution backdrops featuring trending global hits.
-- **Smart Primary Navigation**: Clean, compact action buttons for **Watch Trailer**, **Favorites**, and **Details**.
-- **Interactive Details**: Deep-dive into movie overviews, ratings, and trailers with a single click.
+- **Smart Primary Navigation**: Clean, compact action buttons for **Watch** and **Favorites**.
+- **Interactive Details**: Deep-dive into movie overviews and ratings with a single click.
 
 ### 2. **Premium Brand Identity**
 - **3D Glassmorphism Logo**: A modern, translucent brand mark that defines the platform’s high-end aesthetic.

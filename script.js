@@ -30,6 +30,38 @@ const requests = {
 let featuredMovies = [];
 let currentHeroIndex = 0;
 
+function selectMovie(movie) {
+    if (!movie) return;
+
+    // 1. Move to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // 2. Add to featured list if not there
+    let index = featuredMovies.findIndex(m => (m.id && m.id === movie.id) || (m.title && m.title === movie.title));
+    if (index === -1) {
+        featuredMovies.unshift(movie); // Put at start
+        currentHeroIndex = 0;
+    } else {
+        currentHeroIndex = index;
+    }
+
+    // 3. Update Hero Visually
+    const hero = document.getElementById('hero');
+    const rowsContainer = document.getElementById('rows-container');
+    if (hero) hero.style.display = 'flex';
+
+    // If we are looking at a specific grid/page, we should probably return to home
+    // but the user said "direct open this in primary section"
+    // So let's make sure strings are updated
+    updateHeroDisplay(movie);
+
+    // 4. Update the My List button state in the hero
+    const myListBtn = document.getElementById('btn-add');
+    const currentList = JSON.parse(localStorage.getItem('netflix_clone_mylist') || '[]');
+    const isAdded = currentList.some(m => (m.id && m.id === movie.id) || (m.title && m.title === movie.title));
+    updateMyListButton(myListBtn, isAdded);
+}
+
 const modal = document.getElementById('modal');
 const modalBody = document.getElementById('modal-body');
 const closeBtn = document.getElementById('close-modal');
@@ -97,8 +129,8 @@ function resetAuthState() {
     const confirmField = document.getElementById('confirm-password-field');
     const authExtras = document.getElementById('auth-extras');
 
-    if (authTitle) authTitle.textContent = 'Sign In';
-    if (mainAuthBtn) mainAuthBtn.textContent = 'Sign In';
+    if (authTitle) authTitle.textContent = 'Login';
+    if (mainAuthBtn) mainAuthBtn.textContent = 'Login';
     if (signinToggle) signinToggle.style.display = 'block';
     if (signupToggle) signupToggle.style.display = 'none';
     if (nameField) nameField.style.display = 'none';
@@ -119,8 +151,8 @@ function showSignupPage(email = '') {
     const authExtras = document.getElementById('auth-extras');
     const emailInput = document.getElementById('email');
 
-    if (authTitle) authTitle.textContent = 'Sign Up';
-    if (mainAuthBtn) mainAuthBtn.textContent = 'Sign Up';
+    if (authTitle) authTitle.textContent = 'Create Account';
+    if (mainAuthBtn) mainAuthBtn.textContent = 'Create Account';
     if (signinToggle) signinToggle.style.display = 'none';
     if (signupToggle) signupToggle.style.display = 'block';
     if (nameField) nameField.style.display = 'block';
@@ -155,8 +187,8 @@ const authExtras = document.getElementById('auth-extras');
 if (showSignup) {
     showSignup.onclick = (e) => {
         e.preventDefault();
-        authTitle.textContent = 'Sign Up';
-        mainAuthBtn.textContent = 'Sign Up';
+        authTitle.textContent = 'Create Account';
+        mainAuthBtn.textContent = 'Create Account';
         signinToggle.style.display = 'none';
         signupToggle.style.display = 'block';
         if (nameField) nameField.style.display = 'block';
@@ -168,8 +200,8 @@ if (showSignup) {
 if (showSignin) {
     showSignin.onclick = (e) => {
         e.preventDefault();
-        authTitle.textContent = 'Sign In';
-        mainAuthBtn.textContent = 'Sign In';
+        authTitle.textContent = 'Login';
+        mainAuthBtn.textContent = 'Login';
         signinToggle.style.display = 'block';
         signupToggle.style.display = 'none';
         if (nameField) nameField.style.display = 'none';
@@ -182,7 +214,7 @@ if (forgotPasswordLink) {
     forgotPasswordLink.onclick = (e) => {
         e.preventDefault();
         authTitle.textContent = 'Reset Password';
-        mainAuthBtn.textContent = 'Save and Sign In';
+        mainAuthBtn.textContent = 'Save and Login';
         signinToggle.style.display = 'none';
         signupToggle.style.display = 'block'; // Show "Already have an account? Sign in now"
         if (nameField) nameField.style.display = 'none';
@@ -267,7 +299,7 @@ async function renderLandingTrending() {
         `;
 
         // Make clickable
-        div.onclick = () => showMovieDetails(movie, true);
+        div.onclick = () => showMovieDetails(movie, false);
 
         container.appendChild(div);
     });
@@ -310,7 +342,7 @@ loginForm.onsubmit = (e) => {
         loginForm.insertBefore(errorDiv, loginForm.firstChild);
     }
 
-    if (title === 'Sign Up') {
+    if (title === 'Create Account') {
         if (password !== confirm) {
             showError("Passwords do not match!");
             return;
@@ -335,21 +367,14 @@ loginForm.onsubmit = (e) => {
         alert("Password reset successful! Logging you in...");
     }
 
-    // Sign In Validation
-    const storedEmail = localStorage.getItem('netflix_clone_email');
-    const storedPassword = localStorage.getItem('netflix_clone_password');
-
-    // Case-insensitive comparison for email
-    if (!storedEmail || email.toLowerCase() !== storedEmail.toLowerCase() || (password && password !== storedPassword)) {
-        showError("Incorrect email or password. If you are a new user, please create an account first.");
-        return;
-    }
-
+    // Bypass validation: Accept any dummy email and password for demo purposes
     if (email) {
         localStorage.setItem('netflix_clone_email', email);
     }
-
+    localStorage.setItem('netflix_clone_auth', 'true');
     showProfileSelection();
+    return;
+
 };
 
 // Profile Selection Logic (Delegated)
@@ -540,8 +565,8 @@ async function fetchData(url) {
 
 function updateHeroDisplay(movie) {
     document.getElementById('hero').style.backgroundImage = movie.custom
-        ? `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${movie.backdrop_path})`
-        : `url(${IMAGE_BASE_URL}${movie.backdrop_path})`;
+        ? `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("${movie.backdrop_path}")`
+        : `url("${IMAGE_BASE_URL}${movie.backdrop_path}")`;
 
     const titleEl = document.getElementById('hero-title');
     if (movie.logo_path) {
@@ -605,7 +630,7 @@ async function renderHero() {
     // Attach Hero Button Listeners
     document.getElementById('btn-play').onclick = () => {
         if (featuredMovies[currentHeroIndex]) {
-            playTrailer(featuredMovies[currentHeroIndex]);
+            showMovieDetails(featuredMovies[currentHeroIndex], false);
         }
     };
 
@@ -630,9 +655,6 @@ async function renderHero() {
             updateMyListButton(myListBtn, true);
         }
         localStorage.setItem('netflix_clone_mylist', JSON.stringify(list));
-    };
-    document.getElementById('btn-info').onclick = () => {
-        showMovieDetails(featuredMovies[currentHeroIndex], false);
     };
 }
 
@@ -676,42 +698,6 @@ function updateMyListButton(btn, isAdded) {
     }
 }
 
-// === Video Player Functionality ===
-function playTrailer(movie) {
-    const videoModal = document.getElementById('video-modal');
-    const videoContainer = document.getElementById('video-container');
-
-    // Default trailer ID (Generic Action/Cinematic)
-    // Using a safe YouTube embed
-    // "Taskaree" is fictional, so we use a high-quality action trailer placeholder
-    // e.g., Top Gun Maverick or similar visual style 
-    let youtubeId = 'qSqVVajZ-2ea'; // Default generic
-
-    // Map specific movies or genres if we wanted, for now just generic action for Taskaree
-    // or search for trailer.
-    if (movie.title && movie.title.includes('Taskaree')) {
-        youtubeId = 'JfVOs4VSpmA'; // Spiderman No Way Home trailer as placeholder for big action
-    } else if (movie.name === 'Stranger Things' || movie.title === 'Stranger Things') {
-        youtubeId = 'b9EkMc79ZSU'; // Actual Stranger Things Trailer ID
-    }
-
-    videoContainer.innerHTML = `
-        <iframe width="100%" height="100%" 
-        src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=0&modestbranding=1&rel=0" 
-        title="YouTube video player" frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen></iframe>
-    `;
-
-    videoModal.style.display = 'flex';
-}
-
-document.getElementById('close-video').onclick = () => {
-    const videoModal = document.getElementById('video-modal');
-    const videoContainer = document.getElementById('video-container');
-    videoModal.style.display = 'none';
-    videoContainer.innerHTML = ''; // Stop video
-};
 
 document.getElementById('hero-next').onclick = () => {
     currentHeroIndex = (currentHeroIndex + 1) % featuredMovies.length;
@@ -759,7 +745,7 @@ async function renderRow(title, url, isLarge = false) {
             const img = document.createElement('img');
             img.className = isLarge ? 'row-poster row-posterLarge' : 'row-poster';
             img.src = `${IMAGE_BASE_URL}${path}`;
-            img.onclick = () => showMovieDetails(movie, true);
+            img.onclick = () => showMovieDetails(movie, false);
             postersDiv.appendChild(img);
         }
     });
@@ -842,7 +828,7 @@ async function renderTop10Row(title, url) {
             <span class="trending-number">${index + 1}</span>
             <img src="${posterUrl}" alt="${movie.title || movie.name}">
         `;
-        item.onclick = () => showMovieDetails(movie, true);
+        item.onclick = () => showMovieDetails(movie, false);
         postersDiv.appendChild(item);
     });
 
@@ -862,7 +848,7 @@ async function renderGrid(title, url) {
             const item = document.createElement('div');
             item.className = 'grid-item';
             item.innerHTML = `<img src="${POSTER_BASE_URL}${movie.poster_path}" alt="${movie.title}">`;
-            item.onclick = () => showMovieDetails(movie, true);
+            item.onclick = () => showMovieDetails(movie, false);
             grid.appendChild(item);
         }
     });
@@ -909,7 +895,7 @@ async function loadPage(id) {
                     const item = document.createElement('div');
                     item.className = 'grid-item';
                     item.innerHTML = `<img src="${imgUrl}" alt="${movie.title || movie.name}">`;
-                    item.onclick = () => showMovieDetails(movie, true);
+                    item.onclick = () => showMovieDetails(movie, false);
                     grid.appendChild(item);
                 });
                 container.appendChild(grid);
@@ -1005,7 +991,6 @@ async function showMovieDetails(movie, autoPlay = false) {
         </div>
         
         <div id="modal-controls" style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <button id="modal-play-btn" class="btn btn-play" style="padding: 8px 20px; font-size: 1rem;"><i class="fas fa-play"></i> Watch Trailer</button>
             <button id="modal-mylist-btn" class="btn btn-add" style="padding: 8px 20px; font-size: 1rem;">${btnIcon} ${btnText}</button>
         </div>
 
@@ -1015,89 +1000,10 @@ async function showMovieDetails(movie, autoPlay = false) {
     modalBody.appendChild(contentDiv);
     modal.style.display = "block";
 
-    // Video Player Logic
-    const startVideo = async () => {
-        const container = document.getElementById('modal-media-container');
-        if (!container) return;
-
-        container.innerHTML = '<div style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:white; background:black;">Loading Trailer...</div>';
-
-        let youtubeId = 'qSqVVajZ-2ea'; // Default generic
-
-        try {
-            if (movie.custom && movie.title.includes('Taskaree')) {
-                youtubeId = 'JfVOs4VSpmA';
-            } else {
-                let videos = [];
-                if (movie.first_air_date || movie.name) {
-                    videos = await fetchTVVideos(movie.id);
-                } else {
-                    videos = await fetchMovieVideos(movie.id);
-                }
-
-                if (videos && videos.length > 0) {
-                    const trailer = videos.find(v => v.type === 'Trailer') || videos.filter(v => v.site === 'YouTube')[0];
-                    if (trailer) youtubeId = trailer.key;
-                }
-            }
-        } catch (err) {
-            console.error("Error fetching video:", err);
-            // Fallback to generic is already set
-        }
-
-        container.innerHTML = `
-            <iframe width="100%" height="100%" 
-            src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&modestbranding=1&rel=0" 
-            title="YouTube video player" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen></iframe>
-        `;
-    };
-
-    // Attach listeners
-    const playBtn = document.getElementById('modal-play-btn');
-    if (playBtn) playBtn.onclick = startVideo;
-
     const listBtn = document.getElementById('modal-mylist-btn');
     if (listBtn) listBtn.onclick = (e) => toggleMyList(movie, e.target.closest('button'));
-
-    if (autoPlay) {
-        startVideo();
-    }
 }
 
-// Redirect playTrailer to use the modal in auto-play mode
-async function playTrailer(movie) {
-    showMovieDetails(movie, true);
-}
-
-async function fetchMovieVideos(movieId) {
-    try {
-        const response = await fetch(`${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`);
-        const data = await response.json();
-        return data.results || [];
-    } catch (e) {
-        console.error("Fetch movies video failed", e);
-        return [];
-    }
-}
-
-async function fetchTVVideos(tvId) {
-    try {
-        const response = await fetch(`${BASE_URL}/tv/${tvId}/videos?api_key=${API_KEY}&language=en-US`);
-        const data = await response.json();
-        return data.results || [];
-    } catch (e) {
-        console.error("Fetch tv video failed", e);
-        return [];
-    }
-}
-document.getElementById('close-video').onclick = () => {
-    const videoModal = document.getElementById('video-modal');
-    const videoContainer = document.getElementById('video-container');
-    videoModal.style.display = 'none';
-    videoContainer.innerHTML = ''; // Stop video
-};
 
 
 
@@ -1145,6 +1051,24 @@ async function init() {
     } else {
         showLandingPage();
         renderLandingTrending();
+    }
+
+    // Logo Click Handlers
+    const logoApp = document.getElementById('logo-app');
+    if (logoApp) {
+        logoApp.onclick = () => {
+            const activeNav = document.querySelector('.nav-links a.active') || { id: 'nav-home' };
+            if (activeNav.id !== 'nav-home') {
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                document.getElementById('nav-home').classList.add('active');
+            }
+            loadPage('nav-home');
+        };
+    }
+
+    const logoLanding = document.getElementById('logo-landing');
+    if (logoLanding) {
+        logoLanding.onclick = () => showLandingPage();
     }
 }
 

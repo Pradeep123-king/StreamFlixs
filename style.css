@@ -449,6 +449,11 @@ body {
     position: relative;
     display: flex;
     align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.logo-text.clickable-logo:hover {
+    transform: scale(1.05);
 }
 
 .row-posters {

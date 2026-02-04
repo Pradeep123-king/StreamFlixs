@@ -18,7 +18,7 @@
   <div id="landing-page" class="landing-page">
     <header id="header" class="landing-header">
       <div class="header-left">
-        <div class="logo-text">STREAMFLIX</div>
+        <div class="logo-text clickable-logo" id="logo-landing">STREAMFLIX</div>
       </div>
       <div class="header-right landing-nav">
         <div class="language-dropdown">
@@ -29,7 +29,7 @@
           </select>
           <i class="fas fa-caret-down"></i>
         </div>
-        <button class="btn-signin-nav" id="btn-login-entry">Sign In</button>
+        <button class="btn-signin-nav" id="btn-login-entry">Login</button>
       </div>
     </header>
 
@@ -40,7 +40,7 @@
         <h3>A UI-focused streaming platform demo</h3>
         <p>Ready to watch? Enter your email to create or restart your membership.</p>
         <form class="landing-email-form">
-          <input type="email" placeholder="Email address" required>
+          <input type="text" placeholder="Demo only – no login" disabled>
           <button type="submit" class="btn-get-started">Get Started <i class="fas fa-chevron-right"></i></button>
         </form>
       </div>
@@ -105,7 +105,7 @@
           <button class="faq-question">Where can I watch? <i class="fas fa-plus"></i></button>
           <div class="faq-answer">
             <p>Watch anywhere, anytime. Sign in with your StreamFlix account to watch instantly on the web at
-              netflix.com
+              streamflix.com
               from your personal computer or on any internet-connected device that offers the StreamFlix app, including
               smart TVs, smartphones, tablets, streaming media players and game consoles.</p>
           </div>
@@ -113,7 +113,7 @@
       </div>
       <p class="faq-bottom-text">Ready to watch? Enter your email to create or restart your membership.</p>
       <form class="landing-email-form">
-        <input type="email" placeholder="Email address" required>
+        <input type="text" placeholder="Demo only – no login" disabled>
         <button type="submit" class="btn-get-started">Get Started <i class="fas fa-chevron-right"></i></button>
       </form>
     </section>
@@ -223,7 +223,7 @@
   <div id="home-page" style="display: none;">
     <header id="app-header">
       <div class="header-left">
-        <div class="logo-text">STREAMFLIX</div>
+        <div class="logo-text clickable-logo" id="logo-app">STREAMFLIX</div>
         <nav class="nav-links">
           <a href="#" id="nav-home">Home</a>
           <a href="#" id="nav-tvshows">TV Shows</a>
@@ -256,7 +256,7 @@
             </div>
             <div class="dropdown-divider"></div>
             <div class="dropdown-links">
-              <a href="#" class="dropdown-link logout" id="logout-btn">Sign out of StreamFlix</a>
+              <a href="#" class="dropdown-link logout" id="logout-btn">Logout</a>
             </div>
           </div>
         </div>
@@ -272,9 +272,8 @@
           <h1 id="hero-title" class="hero-title"></h1>
           <p id="hero-description" class="hero-description"></p>
           <div class="hero-buttons">
-            <button class="btn btn-play" id="btn-play"><i class="fas fa-play"></i> Watch Trailer</button>
+            <button class="btn btn-play" id="btn-play"><i class="fas fa-play"></i> Watch</button>
             <button class="btn btn-add" id="btn-add"><i class="fas fa-star"></i> Favorites</button>
-            <button class="btn btn-info" id="btn-info"><i class="fas fa-info-circle"></i> Details</button>
           </div>
         </div>
         <div class="hero-fade-bottom"></div>
@@ -293,21 +292,21 @@
   <div id="auth-overlay" class="auth-overlay">
     <div class="auth-box-container">
       <div class="auth-card">
-        <h1 id="auth-title">Sign In</h1>
+        <h1 id="auth-title">Login</h1>
         <form id="login-form">
           <div class="input-container" id="name-field" style="display: none;">
             <input type="text" id="name" placeholder="Name">
           </div>
           <div class="input-container">
-            <input type="text" id="email" placeholder="Email or mobile number" required>
+            <input type="email" id="email" placeholder="Demo only">
           </div>
           <div class="input-container" id="password-field">
-            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="password" placeholder="Demo only">
           </div>
           <div class="input-container" id="confirm-password-field" style="display: none;">
             <input type="password" id="confirm-password" placeholder="Confirm Password">
           </div>
-          <button type="submit" class="btn-signin" id="main-auth-btn">Sign In</button>
+          <button type="submit" class="btn-signin" id="main-auth-btn">Login (Demo)</button>
 
           <div id="auth-extras">
             <div class="auth-divider">OR</div>
@@ -323,10 +322,10 @@
           </div>
 
           <div id="signin-toggle-container">
-            <p class="auth-toggle-text">New to StreamFlix? <a href="#" id="show-signup">Sign up now.</a></p>
+            <p class="auth-toggle-text">New to StreamFlix? <a href="#" id="show-signup">Create account now.</a></p>
           </div>
           <div id="signup-toggle-container" style="display: none;">
-            <p class="auth-toggle-text">Already have an account? <a href="#" id="show-signin">Sign in now.</a></p>
+            <p class="auth-toggle-text">Already have an account? <a href="#" id="show-signin">Login now.</a></p>
           </div>
 
           <p class="captcha-text">
@@ -342,14 +341,6 @@
     <div class="modal-content">
       <span class="close-button" id="close-modal">&times;</span>
       <div id="modal-body"></div>
-    </div>
-  </div>
-
-  <!-- Video Player Modal -->
-  <div id="video-modal" class="video-modal">
-    <div class="video-modal-content">
-      <span class="close-video" id="close-video">&times;</span>
-      <div id="video-container"></div>
     </div>
   </div>
 
