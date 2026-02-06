@@ -1099,22 +1099,24 @@ async function init() {
 
 init();
 
-// Modern Startup Logic
-// Modern Startup Logic - Robust
+// Modern Startup Logic - Ultra Robust
 function handleStartup() {
     const loader = document.getElementById('startup-loader');
     if (loader && !loader.classList.contains('hidden')) {
+        loader.classList.add('hidden');
         setTimeout(() => {
-            loader.classList.add('hidden');
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 800);
-        }, 1500);
+            loader.style.display = 'none';
+        }, 800);
     }
 }
 
-// Trigger on load (best case)
+// Primary trigger: DOMContentLoaded (fires faster than load)
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(handleStartup, 1500); // 1.5s animation delay
+});
+
+// Secondary trigger: window load (after all resources)
 window.addEventListener('load', handleStartup);
 
-// Trigger fallback after 3.5 seconds (in case a resource hangs)
-setTimeout(handleStartup, 3500);
+// Emergency fallback: Force hide after 2.5 seconds no matter what
+setTimeout(handleStartup, 2500);
