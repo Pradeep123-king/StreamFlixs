@@ -1114,18 +1114,7 @@ body {
     margin-top: 20px;
 }
 
-.remember-me {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
 
-.remember-me input {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-}
 
 .auth-toggle-text {
     color: rgba(255, 255, 255, 0.7);
@@ -1144,21 +1133,7 @@ body {
     text-decoration: underline;
 }
 
-.captcha-text {
-    font-size: 13px;
-    color: #8c8c8c;
-    margin-top: 15px;
-    line-height: 1.4;
-}
 
-.captcha-text a {
-    color: #0071eb;
-    text-decoration: none;
-}
-
-.captcha-text a:hover {
-    text-decoration: underline;
-}
 
 #signup-toggle-container,
 #signin-toggle-container {
@@ -1196,13 +1171,7 @@ body {
     color: #b3b3b3;
 }
 
-.remember-me {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    margin-bottom: 15px;
-}
+
 
 .auth-footer a {
     color: white;
