@@ -1100,9 +1100,10 @@ async function init() {
 init();
 
 // Modern Startup Logic
-window.addEventListener('load', () => {
+// Modern Startup Logic - Robust
+function handleStartup() {
     const loader = document.getElementById('startup-loader');
-    if (loader) {
+    if (loader && !loader.classList.contains('hidden')) {
         setTimeout(() => {
             loader.classList.add('hidden');
             setTimeout(() => {
@@ -1110,4 +1111,10 @@ window.addEventListener('load', () => {
             }, 800);
         }, 1500);
     }
-});
+}
+
+// Trigger on load (best case)
+window.addEventListener('load', handleStartup);
+
+// Trigger fallback after 3.5 seconds (in case a resource hangs)
+setTimeout(handleStartup, 3500);
