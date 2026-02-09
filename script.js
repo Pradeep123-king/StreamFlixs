@@ -1176,12 +1176,15 @@ function handleStartup() {
 }
 
 // Primary trigger: DOMContentLoaded (fires faster than load)
+// Primary trigger: DOMContentLoaded (fires faster than load)
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(handleStartup, 1500); // 1.5s animation delay
+    setTimeout(handleStartup, 2000); // 2.0s animation delay
 });
 
 // Secondary trigger: window load (after all resources)
-window.addEventListener('load', handleStartup);
+window.addEventListener('load', () => {
+    setTimeout(handleStartup, 2000);
+});
 
-// Emergency fallback: Force hide after 2.5 seconds no matter what
-setTimeout(handleStartup, 2500);
+// Emergency fallback: Force hide after 3 seconds no matter what
+setTimeout(handleStartup, 3000);

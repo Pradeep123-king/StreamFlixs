@@ -88,3 +88,25 @@
     opacity: 0;
     pointer-events: none;
 }
+
+.startup-logo-icon {
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: iconPop 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: 0.3s;
+    margin-bottom: 20px;
+}
+
+@keyframes iconPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(-30deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
