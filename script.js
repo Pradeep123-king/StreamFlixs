@@ -985,6 +985,39 @@ if (manageProfilesLink) {
     };
 }
 
+// Fetch trailer from TMDB API
+async function fetchTrailer(movieId, mediaType = 'movie') {
+    try {
+        // Determine media type - check if it's a TV show
+        const type = mediaType || (movie.first_air_date ? 'tv' : 'movie');
+        const url = `${BASE_URL}/${type}/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.results && data.results.length > 0) {
+            // Look for official trailer first, then any trailer, then any video
+            const trailer = data.results.find(v => v.type === 'Trailer' && v.site === 'YouTube' && v.official) ||
+                data.results.find(v => v.type === 'Trailer' && v.site === 'YouTube') ||
+                data.results.find(v => v.site === 'YouTube');
+            return trailer ? trailer.key : null;
+        }
+        return null;
+    } catch (err) {
+        console.error('Error fetching trailer:', err);
+        return null;
+    }
+}
+
+// Custom trailer mapping for manually added movies
+const customTrailers = {
+    'custom-breaking-bad': 'HhesaQXLuRY',  // Breaking Bad trailer
+    'squid-game-manual': 'oqxAJKy0ii4',    // Squid Game trailer
+    'custom-oppenheimer': 'uYPbbksJxIg',   // Oppenheimer trailer
+    66732: 'b9EkMc79ZSU',                   // Stranger Things trailer
+    'custom-dhurandhar': null,
+    'custom-anaconda': null
+};
+
 // Movie Details Modal with Embedded Trailer
 async function showMovieDetails(movie, autoPlay = false) {
     // Check if added to list
@@ -1008,19 +1041,51 @@ async function showMovieDetails(movie, autoPlay = false) {
 
     const backdropUrl = movie.custom ? movie.backdrop_path : IMAGE_BASE_URL + movie.backdrop_path;
 
+    // Determine media type for API call
+    const mediaType = movie.first_air_date ? 'tv' : 'movie';
+
+    // Check for custom trailer first, then fetch from API
+    let trailerKey = null;
+    if (movie.custom && customTrailers[movie.id]) {
+        trailerKey = customTrailers[movie.id];
+    } else if (customTrailers[movie.id]) {
+        trailerKey = customTrailers[movie.id];
+    } else if (movie.id && !movie.custom) {
+        trailerKey = await fetchTrailer(movie.id, mediaType);
+    }
+
+    // Create media content - either trailer or backdrop image
+    let mediaContent = '';
+    if (trailerKey) {
+        mediaContent = `
+            <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/${trailerKey}?autoplay=1&rel=0&modestbranding=1&controls=1" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            </iframe>
+        `;
+    } else {
+        mediaContent = `<img src="${backdropUrl}" style="width:100%; height: 100%; object-fit: cover;">`;
+    }
+
     const contentDiv = document.createElement('div');
     contentDiv.innerHTML = `
         <h2 style="margin-top: 0; padding-right: 30px; margin-bottom: 10px;">${movie.name || movie.title}</h2>
         <div id="modal-media-container" style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 15px;">
-            <img src="${backdropUrl}" style="width:100%; height: 100%; object-fit: cover;">
+            ${mediaContent}
         </div>
         
         <div id="modal-controls" style="display: flex; gap: 10px; margin-bottom: 20px;">
             <button id="modal-mylist-btn" class="btn btn-add" style="padding: 8px 20px; font-size: 1rem;">${btnIcon} ${btnText}</button>
+            ${trailerKey ? '<span style="color: #46d369; font-size: 0.9rem; display: flex; align-items: center; gap: 5px;"><i class="fas fa-play-circle"></i> Trailer Playing</span>' : '<span style="color: #808080; font-size: 0.9rem; display: flex; align-items: center; gap: 5px;"><i class="fas fa-image"></i> No trailer available</span>'}
         </div>
 
-        <p><strong>Rating:</strong> ${movie.vote_average} / 10</p>
-        <p style="margin-top:10px;">${movie.overview}</p>
+        <p><strong>Rating:</strong> ${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'} / 10</p>
+        <p style="margin-top:10px;">${movie.overview || 'No description available.'}</p>
     `;
     modalBody.appendChild(contentDiv);
     modal.style.display = "block";
